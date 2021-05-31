@@ -5,6 +5,7 @@
  */
 package sockettcp;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -18,14 +19,14 @@ import java.net.Socket;
  *
  * @author user
  */
-public class ServidorTCP extends Thread{
+public class ServidorTCPGI extends Thread{
 
     ServerSocket socketServidor = null;
     Socket socketCliente = null;
     BufferedReader entrada = null;
     PrintWriter salida = null;
 
-    public ServidorTCP(Socket s){
+    public ServidorTCPGI(Socket s){
         this.socketCliente = s;
     }
 
@@ -44,53 +45,62 @@ public class ServidorTCP extends Thread{
                 salida = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socketCliente.getOutputStream())), true);
                 while(true){
                     //bienvenida
-                    String mensaje = "Bienvenido a la calculadora, ingrese alguna de las siguientes opciones para continuar:"
-                            +" 1) Suma (a+b)"
-                            +" 2) Resta (a-b)"
-                            +" 3) División (a/b)"
-                            +" 4) Multiplicación (a*b)"
-                            +" x) Salir";
+                    String mensaje = ("Bienvenido a la calculadora, ingrese alguna de las siguientes opciones para continuar:"
+                            +"\n 1) Suma (a+b)"
+                            +"\n 2) Resta (a-b)"
+                            +"\n 3) División (a/b)"
+                            +"\n 4) Multiplicación (a*b)"
+                            +"\n x) Salir");
 
-                    salida.println(mensaje);
+
+                    //salida.println(mensaje);
+
                     System.out.println("Enviado a "+socketCliente.getRemoteSocketAddress()+": "+mensaje);
                     //respuesta
-                    String rta = entrada.readLine();
+                    String rta = JOptionPane.showInputDialog(mensaje);
                     System.out.println(socketCliente.getRemoteSocketAddress()+": "+rta);
 
                     //primer numero
-                    mensaje = "Ingrese el número a";
-                    salida.println(mensaje);
+                    //mensaje = "Ingrese el número a";
+                    //salida.println(mensaje);
                     System.out.println("Enviado a "+socketCliente.getRemoteSocketAddress()+": "+mensaje);
-                    a = Integer.parseInt(entrada.readLine());
+
+                    a = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero a"));
+                    //Integer.parseInt(entrada.readLine());
                     System.out.println(socketCliente.getRemoteSocketAddress()+": "+a);
 
                     //segundo numero
-                    mensaje = "Ingrese el número b";
-                    salida.println(mensaje);
+                    //mensaje = "Ingrese el número b";
+                    //salida.println(mensaje);
                     System.out.println("Enviado a "+socketCliente.getRemoteSocketAddress()+": "+mensaje);
-                    b = Integer.parseInt(entrada.readLine());
+                    //b = Integer.parseInt(entrada.readLine());
+                    b = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero b"));
                     System.out.println(socketCliente.getRemoteSocketAddress()+": "+b);
 
                     //calculo
                     switch(rta){
                         case "1":
-                            mensaje="La suma de ambos es: "+(a+b)+". Envía algo para volver al menú principal";
-                            salida.println(mensaje);
+                            //mensaje="La suma de ambos es: "+(a+b)+". Envía algo para volver al menú principal";
+                            //salida.println(mensaje);
+                            JOptionPane.showMessageDialog(null,"La suma de ambos es: "+(a+b));
                             System.out.println("Enviado a "+socketCliente.getRemoteSocketAddress()+": "+mensaje);
                             break;
                         case "2":
-                            mensaje="La resta de ambos es: "+(a-b)+". Envía algo para volver al menú principal";
-                            salida.println(mensaje);
+                            //mensaje="La resta de ambos es: "+(a-b)+". Envía algo para volver al menú principal";
+                            //salida.println(mensaje);
+                            JOptionPane.showMessageDialog(null,"La resta de ambos es: "+(a-b));
                             System.out.println("Enviado a "+socketCliente.getRemoteSocketAddress()+": "+mensaje);
                             break;
                         case "3":
-                            mensaje="La división de ambos es: "+(a/b)+". Envía algo para volver al menú principal";
-                            salida.println(mensaje);
+                            //mensaje="La división de ambos es: "+(a/b)+". Envía algo para volver al menú principal";
+                            //salida.println(mensaje);
+                            JOptionPane.showMessageDialog(null,"La division de ambos es: "+(a/b));
                             System.out.println("Enviado a "+socketCliente.getRemoteSocketAddress()+": "+mensaje);
                             break;
                         case "4":
-                            mensaje="La multiplicación entre ambos es: "+(a*b)+". Envía algo para volver al menú principal";
-                            salida.println(mensaje);
+                            //mensaje="La multiplicación entre ambos es: "+(a*b)+". Envía algo para volver al menú principal";
+                            //salida.println(mensaje);
+                            JOptionPane.showMessageDialog(null,"La multiplicacion de ambos es: "+(a*b));
                             System.out.println("Enviado a "+socketCliente.getRemoteSocketAddress()+": "+mensaje);
                             break;
                         case "x":
