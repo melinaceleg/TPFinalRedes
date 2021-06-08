@@ -60,6 +60,12 @@ public class ServidorTCPGI extends Thread{
                     String rta = JOptionPane.showInputDialog(mensaje);
                     System.out.println(socketCliente.getRemoteSocketAddress()+": "+rta);
 
+                    if(rta.equalsIgnoreCase("x")){
+                        socketCliente.close();
+                        System.out.println(socketCliente.getRemoteSocketAddress()+" close session ");
+                        break;
+                    }
+
                     //primer numero
                     //mensaje = "Ingrese el número a";
                     //salida.println(mensaje);
@@ -102,10 +108,6 @@ public class ServidorTCPGI extends Thread{
                             //salida.println(mensaje);
                             JOptionPane.showMessageDialog(null,"La multiplicacion de ambos es: "+(a*b));
                             System.out.println("Enviado a "+socketCliente.getRemoteSocketAddress()+": "+mensaje);
-                            break;
-                        case "x":
-                            socketCliente.close();
-                            System.out.println(socketCliente.getRemoteSocketAddress()+" close session ");
                             break;
                         default:
                             return;
