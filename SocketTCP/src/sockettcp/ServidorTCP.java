@@ -83,21 +83,25 @@ public class ServidorTCP extends Thread{
                             mensaje="La suma de ambos es: "+(a+b)+". Envía algo para volver al menú principal";
                             salida.println(mensaje);
                             System.out.println("Enviado a "+socketCliente.getRemoteSocketAddress()+": "+mensaje);
+                            entrada.readLine();
                             break;
                         case "2":
                             mensaje="La resta de ambos es: "+(a-b)+". Envía algo para volver al menú principal";
                             salida.println(mensaje);
                             System.out.println("Enviado a "+socketCliente.getRemoteSocketAddress()+": "+mensaje);
+                            entrada.readLine();
                             break;
                         case "3":
                             mensaje="La división de ambos es: "+(a/b)+". Envía algo para volver al menú principal";
                             salida.println(mensaje);
                             System.out.println("Enviado a "+socketCliente.getRemoteSocketAddress()+": "+mensaje);
+                            entrada.readLine();
                             break;
                         case "4":
                             mensaje="La multiplicación entre ambos es: "+(a*b)+". Envía algo para volver al menú principal";
                             salida.println(mensaje);
                             System.out.println("Enviado a "+socketCliente.getRemoteSocketAddress()+": "+mensaje);
+                            entrada.readLine();
                             break;
                         default:
                             return;

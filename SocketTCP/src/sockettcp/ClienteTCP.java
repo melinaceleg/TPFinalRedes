@@ -25,21 +25,31 @@ public class ClienteTCP {
     public static void main(String[] args) throws IOException {
        
        Socket socketCliente = null;
-       
+
        BufferedReader entrada = null; //leer texto de secuencia de entrada
        PrintWriter salida = null; //crear y escribir archivos
-       
-       System.out.println("---Cliente----");
-       try{
-           socketCliente = new Socket("localhost", 3000);
-           entrada = new BufferedReader(new InputStreamReader(socketCliente.getInputStream()));
-           salida = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socketCliente.getOutputStream())), true);
-       }
-       catch(Exception e){
-           System.out.println(e);
-       }
-       
-       BufferedReader sc = new BufferedReader( new InputStreamReader(System.in));
+
+        BufferedReader sc = new BufferedReader( new InputStreamReader(System.in));
+
+        String ip;
+        int puerto;
+
+        System.out.println("---Cliente----");
+
+        System.out.println("Ingrese la ip...");
+        ip = sc.readLine();
+        System.out.println("Ingrese el puerto...");
+        puerto = Integer.parseInt(sc.readLine());
+
+        try{
+            socketCliente = new Socket(ip, puerto);
+            entrada = new BufferedReader(new InputStreamReader(socketCliente.getInputStream()));
+            salida = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socketCliente.getOutputStream())), true);
+        }
+        catch(Exception e){
+            System.out.println("La ip ingresada es inválida...");
+        }
+
        String cad;
        try{
            while(true){
