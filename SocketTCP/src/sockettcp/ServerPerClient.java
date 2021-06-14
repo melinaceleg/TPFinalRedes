@@ -26,7 +26,7 @@ public class ServerPerClient {
             try{
                 s= ss2.accept();
                 System.out.println("connection Established");
-                ServidorTCPGI st=new ServidorTCPGI(s);
+                ServidorTCP st=new ServidorTCP(s);
                 st.start();
 
             }
